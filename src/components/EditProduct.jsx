@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const EditProduct = () => {
   const [product, setProduct] = useState(null);
   const { productID } = useParams();
-  const [checkData, setCheckData] = useState(false);
+  const [checkData, setCheckData] = useState(true);
   const navigate = useNavigate();
 
   const validateInputs = () => {
@@ -30,11 +30,9 @@ const EditProduct = () => {
       method: "GET",
       url: `http://localhost:3000/products/${productID}`,
     }).then((data) => {
-      console.log(data.data);
-
       setProduct({ ...data.data });
     });
-  }, []);
+  }, [productID]);
   function EditProduct() {
     if (!validateInputs()) return;
 
@@ -44,7 +42,7 @@ const EditProduct = () => {
       data: product,
     }).then(() => {
       alert("Product Updated successfully!.");
-      navigate("/dashboard");
+      navigate("/products");
     });
 
   }
