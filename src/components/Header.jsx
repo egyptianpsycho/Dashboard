@@ -19,13 +19,13 @@ const Header = () => {
 
             <div className="hidden md:flex md:items-center md:space-x-10">
               <button
-                onClick={() => navigate("home")}
+                onClick={() => navigate("/home")}
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition"
               >
                 Home
               </button>
               <button
-                onClick={() => navigate("products")}
+                onClick={() => navigate("/products")}
                 className="px-4 py-2 text-sm font-medium text-white bg-green-500 rounded-lg hover:bg-green-600 transition"
               >
                 Dashboard

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+  const Navigate = useNavigate();
   const [data, setData] = useState({
     title: "",
     brand: "",
@@ -39,6 +41,7 @@ const AddProduct = () => {
     }).then(() => {
       alert("All Product added successfully!.");
     });
+    Navigate("/products");
   };
 
   return (
