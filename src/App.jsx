@@ -1,4 +1,4 @@
-import Dashboard from './components/dashboard'
+import Dashboard from './components/Dashboard.jsx'
 import Header from './components/Header.jsx'
 import Home from './components/Home.jsx'
 import NotFound  from './components/NotFound.jsx'
