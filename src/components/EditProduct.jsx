@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const EditProduct = () => {
   const [product, setProduct] = useState(null);
@@ -41,10 +42,14 @@ const EditProduct = () => {
       url: `http://localhost:3000/products/${productID}`,
       data: product,
     }).then(() => {
-      alert("Product Updated successfully!.");
-      navigate("/products");
-    });
-
+          Swal.fire({
+            title: "Product updated successfully!",
+            icon: "success",
+          });
+        });
+        setTimeout(() => {
+          navigate("/products");
+        }, 600);
   }
 
   return (

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import Swal from 'sweetalert2'
 const AddProduct = () => {
   const Navigate = useNavigate();
   const [data, setData] = useState({
@@ -39,9 +39,14 @@ const AddProduct = () => {
       url: "http://localhost:3000/products",
       data: data,
     }).then(() => {
-      alert("All Product added successfully!.");
+      Swal.fire({
+        title: "Product added successfully!",
+        icon: "success",
+      });
     });
-    Navigate("/products");
+    setTimeout(() => {
+      Navigate("/products");
+    }, 600);
   };
 
   return (

@@ -1797,31 +1797,13 @@
       "thumbnail": "https://cdn.dummyjson.com/products/images/groceries/Kiwi/thumbnail.png"
     },
     {
-      "title": "Ziad Abbas Coffee",
+      "title": "egypticano",
       "brand": "egyptian",
-      "price": "2000",
-      "thumbnail": "maybe",
-      "shippingInformation": "lol 2 days",
-      "category": "american",
+      "price": "11.97$",
+      "thumbnail": "public/coffee.webp",
+      "shippingInformation": "lol 7 mins",
+      "category": "drinks",
       "id": 31
-    },
-    {
-      "title": "Hello....you",
-      "brand": "YOU",
-      "price": "0.1$",
-      "thumbnail": "empty",
-      "shippingInformation": "1 sec",
-      "category": "Comedy",
-      "id": 32
-    },
-    {
-      "title": "Hello....you",
-      "brand": "YOU",
-      "price": "0.1$",
-      "thumbnail": "empty",
-      "shippingInformation": "1 sec",
-      "category": "maybe",
-      "id": 33
     }
   ]
 }

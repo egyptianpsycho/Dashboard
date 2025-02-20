@@ -1,20 +1,51 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ButtonGroup, Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const Dashboard = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState(null);
-  useEffect(() => {
+  const fetchProducts = () => {
     axios({
       method: "GET",
       url: "http://localhost:3000/products",
     }).then((response) => {
       setProducts(response.data);
     });
+  };
+  useEffect(() => {
+    fetchProducts();
   }, []);
 
   const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  const deleteProduct = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios({
+          method: "DELETE",
+          url: `http://localhost:3000/products/${id}`,
+        }).then(() => {
+          fetchProducts();
+        });
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (
@@ -63,13 +94,6 @@ const Dashboard = () => {
                   Action
                 </p>
               </th>
-              <th className="p-4 border-b border-slate-600 bg-slate-700">
-                <p className="text-sm font-normal leading-none text-slate-300">
-                  <button onClick={()=> navigate('/addProduct')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2">
-                    Add Product
-                  </button>{" "}
-                </p>
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -112,19 +136,28 @@ const Dashboard = () => {
                     </p>
                   </td>
                   <td className="p-4 border-b border-slate-700">
-                    <button
-                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                      onClick={() => navigate(`/products/${data.id}`)}
-                    >
-                      View
-                    </button>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2"
-                      onClick={() => navigate (`/editproduct/${data.id}`)}>
-                      Edit
-                    </button>
-                    <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                      Delete
-                    </button>
+                    
+                    <div className="flex w-max flex-col gap-4 cursor-pointer conta">
+                      <ButtonGroup>
+                        <Button
+                        className="cursor-pointer hover:bg-fuchsia-100 btn hover:text-black"
+                          onClick={() => navigate(`/products/${data.id}`)}
+                        >
+                          View
+                        </Button>
+                        <Button
+                          className="mx-1 cursor-pointer hover:bg-blue-950 btn"
+                          onClick={() => navigate(`/editproduct/${data.id}`)}
+                        >
+                          Update
+                        </Button>
+                        <Button
+                          className="cursor-pointer hover:bg-red-950 btn"
+                          onClick={() => deleteProduct(data.id)}>
+                          Delete
+                        </Button>
+                      </ButtonGroup>
+                    </div>
                   </td>
                 </tr>
               ))}
